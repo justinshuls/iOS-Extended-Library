@@ -7,9 +7,11 @@
 
 import Foundation
 
+//MARK:- string
+
 extension String {
     
-    func isBackspace() -> Bool {
+    var isBackspace: Bool {
         
         let  char = self.cString(using: String.Encoding.utf8)!
         let isBackSpace = strcmp(char, "\\b")
@@ -17,16 +19,16 @@ extension String {
         return isBackSpace == -92
     }
     
-    func trimmed() {
+    func trimWhiteSpace() -> String {
         return self.trimmingCharacters(in: .whitespaces)
     }
     
-    var filterNumbers: String {
+    var filteredNumbers: String {
         return components(separatedBy: CharacterSet.decimalDigits.inverted)
             .joined()
     }
     
-    var filterPhoneDigit: String {
+    var filteredPhoneDigit: String {
         
         let including = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+:;"))
         
@@ -34,7 +36,25 @@ extension String {
             .joined()
     }
     
-    func filterSpaces() -> String {
+    var filteredSpaces: String {
         return self.replacingOccurrences(of: " ", with: "")
     }
+    
+}
+
+extension UIApplication {
+    
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
+    }
+    
+}
+
+func haptic(type: UINotificationFeedbackGenerator.FeedbackType) {
+    UINotificationFeedbackGenerator().notificationOccurred(type)
+}
+
+func haptic(intensity: UIImpactFeedbackGenerator.FeedbackStyle) {
+    let generator = UIImpactFeedbackGenerator(style: intensity)
+    generator.impactOccurred()
 }
