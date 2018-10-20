@@ -19,6 +19,10 @@ extension String {
         return isBackSpace == -92
     }
     
+    var hasText: Bool {
+        return !self.isEmpty
+    }
+    
     func trimWhiteSpace() -> String {
         return self.trimmingCharacters(in: .whitespaces)
     }
@@ -28,7 +32,7 @@ extension String {
             .joined()
     }
     
-    var filteredPhoneDigit: String {
+    var filteredPhoneDigits: String {
         
         let including = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+:;"))
         
@@ -42,6 +46,8 @@ extension String {
     
 }
 
+//MARK:- application
+
 extension UIApplication {
     
     var statusBarView: UIView? {
@@ -49,6 +55,8 @@ extension UIApplication {
     }
     
 }
+
+//MARK:- haptic
 
 func haptic(type: UINotificationFeedbackGenerator.FeedbackType) {
     UINotificationFeedbackGenerator().notificationOccurred(type)
